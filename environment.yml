@@ -1,0 +1,16 @@
+name: uxo-workspace
+
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - pip
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - torch
+  - verde
+  - h5py
+  - urllib
