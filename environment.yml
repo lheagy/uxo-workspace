@@ -13,4 +13,3 @@ dependencies:
   - pytorch
   - verde
   - h5py
-  - urllib
