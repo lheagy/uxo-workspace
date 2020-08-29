@@ -2,6 +2,7 @@ import h5py
 import os
 
 from .imports import code_dir, SensorInfo
+from .parse import parse_data_dict, proc_group
 
 def load_ordnance_dict(
     directory=code_dir,
@@ -57,3 +58,14 @@ def load_sensor_info(
 ):
 
     return SensorInfo.fromYAML(filename)[0]
+
+
+def load_and_parse_h5_data(filepath):
+    
+    # load into a dict with h5py
+    dfile = os.path.join(filepath)
+    f = h5py.File(dfile, 'r')
+    dic = proc_group(f)
+    f.close()
+    
+    return parse_data_dict(dic)
