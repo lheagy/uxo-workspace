@@ -40,32 +40,3 @@ def proc_group(inp):
         pass
     return dic
 
-
-def parse_data_dict(dic):
-    """
-    Parse an input dictionary and extract the relevant parameters
-    """
-    
-    output = {}
-
-    xyz_dict = dic["XYZ"]
-    xyz_data = xyz_dict["Data"]
-
-    output["times"] = np.array(dic['SensorTimes'].flatten())
-
-    def get_index(key):
-        return xyz_dict["Info"][key]["ChannelIndex"].flatten().astype(int)-1
-
-    output["easting"] = xyz_data[get_index("Easting"), :]
-    output["northing"] = xyz_data[get_index("Northing"), :]
-    output["yaw"] = xyz_data[get_index("Yaw"), :]
-    output["pitch"] = xyz_data[get_index("Pitch"), :]
-    output["roll"] = xyz_data[get_index("Roll"), :]
-    output["mn"] = xyz_data[get_index("MeasNum"), :].astype(int) - 1 # index from zero in python
-    output["line"] = xyz_data[get_index("Line"), :]
-    output["rx_num"] = xyz_data[get_index("RxNum"), :].astype(int) - 1
-    output["tx_num"] = xyz_data[get_index("TxNum"), :].astype(int) - 1
-    output["rx_comp"] = xyz_data[get_index("RxCNum"), :].astype(int) - 1
-    output["data"] = xyz_data[get_index("Data"), :].T
-    
-    return output
